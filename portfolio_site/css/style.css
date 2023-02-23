@@ -3,8 +3,21 @@ body{
   color: aliceblue;
 }
 
+/*
+remove comment to add image
+img {
 
+  height: auto;
 
+  max-width: 20%;
+  text-align: center;
+  padding-top: 30px;
+
+}
+#image{
+  text-align: center;
+}
+*/
 * {
 
 margin: 0;
@@ -97,6 +110,7 @@ color: #fff;
   .intro{
     text-align: center;
     font-size: 60px;
+    padding-top: 0px;
     padding: 70px;
   }
 
