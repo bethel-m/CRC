@@ -1,1 +1,9 @@
 CRC
+iac/cert/.terraform
+iac/cert/.terraform.lock.hcl
+iac/cert/terraform.tfstate
+
+iac/site/.terraform
+iac/site/.terraform.lock.hcl
+iac/site/terraform.tfstate
+iac/site/terraform.tfstate.backup
