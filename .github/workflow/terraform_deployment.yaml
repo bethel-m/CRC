@@ -1,0 +1,14 @@
+name: Terraform ci/cd 
+run-name: Deployment by @${{ github.actor }}
+on:
+  pull_request:
+    types:
+      - closed
+  
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true 
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo the pr was merged
