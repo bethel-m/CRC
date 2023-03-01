@@ -5,12 +5,14 @@ on:
     types:
       - closed
     branches:
-      - main 
+      - main
   
 jobs:
   if_merged:
     if: github.event.pull_request.merged == true 
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        echo the pr was merged
+    - uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.3.7
+    - run: terraform --version
