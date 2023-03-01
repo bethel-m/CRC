@@ -5,6 +5,7 @@
 
 
 resource "aws_acm_certificate" "bethelmmadu_cert" {
+  provider = aws.east
   domain_name = "bethelmmadu.site"
   subject_alternative_names = ["*.bethelmmadu.site"]
   validation_method = "DNS"

@@ -25,10 +25,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt" {
   }
 }
 
-data "aws_caller_identity" "current" {}
-locals {
-  account_id = data.aws_caller_identity.current.account_id
-}
+
 
 resource "aws_s3_bucket_public_access_block" "example" {
   bucket = aws_s3_bucket.bethelmmadu.id 
@@ -61,7 +58,7 @@ data "aws_iam_policy_document" "allow_cloudfront_access" {
     condition {
       test = "StringEquals"
       variable = "AWS:SourceArn"
-      values = [ "arn:aws:cloudfront::${local.account_id}:distribution/${aws_cloudfront_distribution.bethelmmadu.id}" ]
+      values = var.cloudfront_arn
     }
   }
 }
@@ -81,5 +78,5 @@ resource "aws_s3_object" "upload_project" {
 
 module "template_files" {
   source = "hashicorp/dir/template"
-  base_dir = "../../portfolio_site"
+  base_dir = var.site_files_path
 }

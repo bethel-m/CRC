@@ -1,3 +1,5 @@
+
+# this is data from importing existing godaddy records
 resource "godaddy_domain_record" "bethelmmadu" {
     addresses   = []
     domain      = "bethelmmadu.site"
@@ -44,14 +46,9 @@ resource "godaddy_domain_record" "bethelmmadu" {
 
  }
 
+# this block tries to perform dns validation by creating records that match that provided by acm
 resource "godaddy_domain_record" "validation" {
-      #domain      = "bethelmmadu.site"
-    # nameservers = [
-    #     "ns23.domaincontrol.com",
-    #     "ns24.domaincontrol.com",
-    # ]
     customer = null 
-        #for_each =toset([ aws_acm_certificate.bethelmmadu_cert.domain_validation_options ])
         for_each = {
                  for name in aws_acm_certificate.bethelmmadu_cert.domain_validation_options:
                   name.domain_name => name
@@ -73,4 +70,20 @@ resource "godaddy_domain_record" "validation" {
         depends_on = [
           aws_acm_certificate.bethelmmadu_cert
         ]
+}
+
+# this block creates record for "me" subdomain, that is linked to the cloudfront domain name
+resource "godaddy_domain_record" "me_CNAME" {
+    customer = null
+    domain = "bethelmmadu.site"
+    record {
+        data = module.cloudfront.cloudfront_domain_name
+        name = var.subdomain_CNAME
+        ttl = 300
+        type = var.record_type        
+    }
+    depends_on = [
+      module.s3,module.cloudfront,godaddy_domain_record.validation
+    ]
+  
 }
