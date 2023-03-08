@@ -23,6 +23,6 @@ jobs:
     - run: ls 
     - run: pwd 
     - run: cd iac/main
-    - run: pwd 
+    - run: ls
 
 
