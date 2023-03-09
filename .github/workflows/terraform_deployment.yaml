@@ -6,6 +6,9 @@ on:
       - closed
     branches:
       - main
+
+env:
+  AWS_REGION : "eu-west-2"
 # add a build job, when you use hugo  
 jobs:
   if_merged:
@@ -21,7 +24,7 @@ jobs:
     - name: configure aws credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: ${env.AWS_ROLE_ARN}
+        role-to-assume: ${seccret.AWS_ROLE_ARN}
         role-session-name: CRCsession
         aws-region: ${{ env.AWS_REGION}}
 
