@@ -28,7 +28,7 @@ resource "aws_iam_role" "gha_oidc_assume_role" {
         "Action" : "sts:AssumeRoleWithWebIdentity",
         "Condition" : {
           "StringEquals" : {
-            "token.actions.githubusercontent.com:sub" : ["repo:<MY_ORG>/<MY_REPO>"]
+            "token.actions.githubusercontent.com:sub" : ["repo:bethel-m/CRC"]
           },
           "StringEquals" : {
             "token.actions.githubusercontent.com:aud" : "sts.amazonaws.com"
@@ -40,7 +40,7 @@ resource "aws_iam_role" "gha_oidc_assume_role" {
 }
 
 # Attach a policy to the role allowing whatever you need for Terraform
-# To do its thing
+# To do its thingC
 resource "aws_iam_role_policy" "gha_oidc_terraform_permissions" {
   name = "gha_oidc_terraform_permissions"
   role = aws_iam_role.gha_oidc_assume_role.id
@@ -50,16 +50,35 @@ resource "aws_iam_role_policy" "gha_oidc_terraform_permissions" {
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
-      {
-        Action = [
-          "sns:*", # EXAMPLE ONLY MAKE THESE MINIMUM PERMISSION SET
-          "lambda:*",
-          "iam:*",
-          "s3:*"
-        ]
-        Effect   = "Allow"
-        Resource = "*"
-      },
+    {
+      "Sid": "CrcUser",
+      "Effect": "Allow",
+      "Action": [
+        "s3:*",
+        "route53:*",
+        "cloudfront:*",
+        "support:*",
+        "waf-regional:*",
+        "waf:*",
+        "wafv2:*",
+        "vpc-lattice:*",
+        "vpc-lattice-svcs:*",
+        "ec2:*",
+        "elasticloadbalancing:*",
+        "iam:CreateServiceLinkedRole",
+        "ssm:GetParameters",
+        "compute-optimizer:GetEnrollmentStatus",
+        "cloudwatch:DescribeAlarms",
+        "ec2-instance-connect:*",
+        "access-analyzer:ValidatePolicy",
+        "cloudtrail:DescribeTrails",
+        "acm:*",
+        "acm-pca:*",
+        "kms:*",
+        "dynamodb:*",
+      ],
+      "Resource": "*"
+    },
     ]
   })
 }
