@@ -22,13 +22,19 @@ jobs:
     - run: |
         terraform --version
 
+    # - name: configure aws credentials
+    #   uses: aws-actions/configure-aws-credentials@v1
+    #   with:
+    #     role-to-assume: arn:aws:iam::745517959886:role/gha_role
+    #     role-session-name: CRCsession
+    #     role-duration-seconds: 900
+    #     aws-region: ${{ env.AWS_REGION}}
     - name: configure aws credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
         role-to-assume: arn:aws:iam::745517959886:role/gha_role
-        role-session-name: CRCsession
-        role-duration-seconds: 900
-        aws-region: ${{ env.AWS_REGION}}
+        role-duration-seconds: 900 # the ttl of the session, in seconds.
+        # aws-region: us-east-1 
 
     - name: checkout repository
       uses: actions/checkout@v3 
