@@ -25,8 +25,9 @@ jobs:
     - name: configure aws credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: "arn:aws:iam::745517959886:role/gha_oidc_assume_role"
+        role-to-assume: arn:aws:iam::745517959886:role/gha_role
         role-session-name: CRCsession
+        role-duration-seconds: 900
         aws-region: ${{ env.AWS_REGION}}
 
     - name: checkout repository
