@@ -10,3 +10,4 @@ iac/main/backend/terraform.tfstate.backup
 
 iac/cert/.terraform
 iac/oidc/.terraform
+iac/oidc/.terraform.lock.hcl

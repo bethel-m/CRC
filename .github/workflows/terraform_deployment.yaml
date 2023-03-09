@@ -18,12 +18,23 @@ jobs:
         terraform_version: 1.3.7
     - run: terraform --version
 
+    - name: configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${env.AWS_ROLE_ARN}
+        role-session-name: CRCsession
+        aws-region: ${{ env.AWS_REGION}}
+
     - name: checkout repository
       uses: actions/checkout@v3 
-    - run: ls 
-    - run: |
+
+    - name: terraform init 
+      run: |
         cd iac/main
         ls 
-        
+        terraform init 
 
-
+    - name: Terraform plan 
+      run: | 
+        echo "### Terraform plan" >> >$GITHUB_STEP_SUMMARY
+        terraform plan -no-color >>$GITHUB_STEP_SUMMARY
