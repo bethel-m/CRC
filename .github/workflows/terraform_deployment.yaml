@@ -52,5 +52,7 @@ jobs:
 
     - name: Terraform plan 
       run: | 
+        cd iac/main
+        ls 
         echo "### Terraform plan" >>$GITHUB_STEP_SUMMARY
         terraform plan -no-color >>$GITHUB_STEP_SUMMARY
