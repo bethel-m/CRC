@@ -34,7 +34,7 @@ jobs:
     - name: configure aws credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
-        role-to-assume: ${{ secret.AWS_ROLE_ARN }}
+        role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
         role-duration-seconds: 900 # the ttl of the session, in seconds.
         aws-region: eu-west-2
 
@@ -51,8 +51,8 @@ jobs:
     - name: Terraform plan 
       env:
         TF_VAR_env: 'dev'
-        TF_VAR_GODADDY_API_KEY: ${{ secret.GODADDY_API_KEY}}
-        TF_VAR_GODADDY_API_SECRET: ${{ secret.GODADDY_API_SECRET}}
+        TF_VAR_GODADDY_API_KEY: ${{ secrets.GODADDY_API_KEY}}
+        TF_VAR_GODADDY_API_SECRET: ${{ secrets.GODADDY_API_SECRET}}
       run: | 
         cd iac/main
         echo "### Terraform plan" 
