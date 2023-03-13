@@ -47,6 +47,7 @@ jobs:
         terraform init 
 
 
+
     - name: Terraform plan 
       env:
         TF_VAR_env: 'dev'
