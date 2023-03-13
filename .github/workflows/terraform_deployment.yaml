@@ -46,6 +46,7 @@ jobs:
         cd iac/main
         terraform init 
 
+
     - name: Terraform plan 
       run: | 
         cd iac/main
