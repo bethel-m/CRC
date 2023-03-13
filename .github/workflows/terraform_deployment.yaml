@@ -11,7 +11,7 @@ env:
   AWS_REGION : "eu-west-2"
 # add a build job, when you use hugo  
 jobs:
-  if_merged:
+  CRC-after-merged:
     if: github.event.pull_request.merged == true 
     runs-on: ubuntu-latest
     permissions:
