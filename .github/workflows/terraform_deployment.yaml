@@ -56,12 +56,12 @@ jobs:
         terraform plan -no-color 
       continue-on-error: true
 
-    # - name: Terraform apply
-    #   env:
-    #     TF_VAR_GODADDY_API_KEY: ${{ secrets.GODADDY_API_KEY}}
-    #     TF_VAR_GODADDY_API_SECRET: ${{ secrets.GODADDY_API_SECRET}}
-    #   run: | 
-    #     cd iac/main
-    #     echo "### Terraform plan" 
-    #     ls 
-    #   continue-on-error: true
+    - name: Terraform apply
+      env:
+        TF_VAR_GODADDY_API_KEY: ${{ secrets.GODADDY_API_KEY}}
+        TF_VAR_GODADDY_API_SECRET: ${{ secrets.GODADDY_API_SECRET}}
+      run: | 
+        cd iac/main
+        echo "### Terraform plan" 
+        terraform apply -auto-approve -input=false
+      continue-on-error: true
