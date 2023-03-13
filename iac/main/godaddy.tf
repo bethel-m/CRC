@@ -79,7 +79,7 @@ resource "godaddy_domain_record" "me_CNAME" {
     record {
         data = module.cloudfront.cloudfront_domain_name
         name = var.subdomain_CNAME
-        ttl = 300
+        ttl = 600
         type = var.record_type        
     }
     depends_on = [
