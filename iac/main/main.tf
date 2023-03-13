@@ -52,7 +52,7 @@ module "s3" {
   source = "./s3"
   bucket_name = "bethelmmadu.site"
   enable_versioning = "Enabled"
-  site_files_path = "../portfolio_site"
+  site_files_path = "../../portfolio_site"
   cloudfront_arn =  [ module.cloudfront.cloudfront_arn]
   depends_on = [
     time_sleep.wait_for_certificate
