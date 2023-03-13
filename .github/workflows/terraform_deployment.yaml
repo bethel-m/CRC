@@ -46,15 +46,22 @@ jobs:
         cd iac/main
         terraform init 
 
-
-
     - name: Terraform plan 
       env:
-        TF_VAR_env: 'dev'
         TF_VAR_GODADDY_API_KEY: ${{ secrets.GODADDY_API_KEY}}
         TF_VAR_GODADDY_API_SECRET: ${{ secrets.GODADDY_API_SECRET}}
       run: | 
         cd iac/main
         echo "### Terraform plan" 
-        ls 
+        terraform plan -no-color 
       continue-on-error: true
+
+    # - name: Terraform apply
+    #   env:
+    #     TF_VAR_GODADDY_API_KEY: ${{ secrets.GODADDY_API_KEY}}
+    #     TF_VAR_GODADDY_API_SECRET: ${{ secrets.GODADDY_API_SECRET}}
+    #   run: | 
+    #     cd iac/main
+    #     echo "### Terraform plan" 
+    #     ls 
+    #   continue-on-error: true
