@@ -65,3 +65,10 @@ jobs:
         echo "### Terraform plan" 
         terraform apply -auto-approve -input=false
       continue-on-error: true
+
+    - name: Invalidate CloudFront
+      uses: chetan/invalidate-cloudfront-action@v2
+      env:
+        DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
+        PATHS: "/*"
+        AWS_REGION: "eu-west-2"
