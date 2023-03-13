@@ -25,6 +25,8 @@ jobs:
     - run: |
         terraform --version
 
+
+
     # - name: configure aws credentials
     #   uses: aws-actions/configure-aws-credentials@v1
     #   with:
