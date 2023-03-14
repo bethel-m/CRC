@@ -72,3 +72,12 @@ jobs:
         DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
         PATHS: "/*"
         AWS_REGION: "eu-west-2"
+
+    - name: Terraform destroy
+      env:
+        TF_VAR_GODADDY_API_KEY: ${{ secrets.GODADDY_API_KEY}}
+        TF_VAR_GODADDY_API_SECRET: ${{ secrets.GODADDY_API_SECRET}}
+      run: | 
+        cd iac/main
+        terraform destroy -auto-approve -input=false
+      continue-on-error: true
