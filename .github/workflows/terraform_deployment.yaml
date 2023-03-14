@@ -79,5 +79,5 @@ jobs:
         TF_VAR_GODADDY_API_SECRET: ${{ secrets.GODADDY_API_SECRET}}
       run: | 
         cd iac/main
-        terraform destroy -auto-approve -input=false
+        terraform destroy -auto-approve
       continue-on-error: true
